@@ -133,8 +133,12 @@
 .pd-sec + .pd-sec{border-top:1px solid var(--line)}
 .pd-sec > h2{font-size:var(--fs-h3);font-weight:800;margin-bottom:18px}
 .pd-desc{max-width:860px;margin:0 auto;font-size:1rem;line-height:1.8}
-.pd-desc img{height:auto;margin:0 auto;border-radius:0}
-.pd-desc p{margin:.8em 0}
+.pd-desc img{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:0}
+.pd-desc p{margin:1.1em 0;text-align:center;text-wrap:pretty}
+/* 사진만 든 문단은 틈 없이 잇는다 (상세 사진은 한 장처럼 이어지게 만든 것) */
+.pd-desc p:has(> img){margin:0}
+.pd-desc > :first-child{margin-top:0}
+.pd-desc > :last-child{margin-bottom:0}
 .pd-desc h2,.pd-desc h3{margin:1.4em 0 .5em;font-weight:800}
 .pd-desc.is-clamped{max-height:1400px;overflow:hidden;position:relative}
 .pd-desc.is-clamped::after{content:"";position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(transparent,var(--rice-50))}

@@ -453,11 +453,13 @@ input,select,textarea{font:inherit;color:inherit}
 @media (max-width:600px){.hs{grid-auto-columns:46%;gap:12px;margin-right:calc(var(--gutter)*-1);padding-right:var(--gutter)}}
 
 /* 만드는 방식 (반찬 노트) */
-.how{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,1rem + 3.4vw,3.5rem);align-items:start}
+.how{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,1rem + 3.4vw,3.5rem);align-items:stretch}
 .how .photos{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;gap:14px;height:clamp(320px,24vw + 220px,560px)}
-.how .photos div{border-radius:var(--r-lg);overflow:hidden;background:var(--rice-200)}
+.how .photos div{border-radius:var(--r-lg);overflow:hidden;background:var(--rice-200);position:relative;min-height:0}
 .how .photos div:first-child{grid-row:1/3}
-.how .photos img{width:100%;height:100%;object-fit:cover}
+.how .photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* 넓은 화면: 사진 묶음을 오른쪽 노트 카드와 위아래 끝이 맞게 늘인다 */
+@media (min-width:901px){.how .photos{height:auto;min-height:clamp(320px,24vw + 220px,560px)}}
 .note{background:var(--rice-100) url(/oneulbanchan-preview/assets/img/bg/paper.webp) center/cover;border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(2.25rem,1.8rem + 2vw,3.25rem) var(--s10) clamp(2.25rem,1.8rem + 2vw,3.25rem) 64px;position:relative}
 .note::before{content:"";position:absolute;left:var(--s8);top:clamp(2.25rem,1.8rem + 2vw,3.25rem);bottom:clamp(2.25rem,1.8rem + 2vw,3.25rem);width:1px;background:rgba(191,79,39,.35)}
 .check{display:flex;gap:14px;align-items:flex-start}
