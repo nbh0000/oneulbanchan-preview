@@ -34,7 +34,7 @@
   /* ---------- 사진이 깨지면 빈 접시 그림으로 ---------- */
   document.addEventListener('error', function (e) {
     var img = e.target;
-    if (img.tagName === 'IMG' && !img.dataset.fallback) { img.dataset.fallback = '1'; img.src = '/oneulbanchan-preview/assets/img/empty-dish.svg'; }
+    if (img.tagName === 'IMG' && !img.dataset.fallback) { img.dataset.fallback = '1'; img.src = 'C:/Program Files/Git/oneulbanchan-preview/assets/img/empty-dish.svg'; }
   }, true);
 
   /* ---------- 서랍 메뉴 ---------- */
@@ -122,9 +122,9 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-add]'); if (!b) return;
     e.preventDefault(); b.classList.add('is-busy');
-    post('/oneulbanchan-preview/cart/add', { product_id: +b.dataset.add, qty: 1 }).then(function (r) {
+    post('C:/Program Files/Git/oneulbanchan-preview/cart/add', { product_id: +b.dataset.add, qty: 1 }).then(function (r) {
       b.classList.remove('is-busy');
-      if (r.ok) { setCartCount(r.count); window.toast(r.message, '', { href: '/oneulbanchan-preview/cart', text: '장바구니 보기' }); }
+      if (r.ok) { setCartCount(r.count); window.toast(r.message, '', { href: 'C:/Program Files/Git/oneulbanchan-preview/cart', text: '장바구니 보기' }); }
       else if (r.needOption && r.url) location.href = r.url;
       else window.toast(r.message, 'error');
     });
@@ -154,8 +154,8 @@
       var b = e.target.closest('[data-cart-submit]'); if (!b) return;
       e.preventDefault();
       if (!buy.reportValidity()) { if (opt && !opt.value) opt.scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
-      post('/oneulbanchan-preview/cart/add', { product_id: +buy.elements.product_id.value, qty: +qtyIn.value, option_id: opt ? +opt.value : 0 }).then(function (r) {
-        if (r.ok) { setCartCount(r.count); window.toast(r.message, '', { href: '/oneulbanchan-preview/cart', text: '장바구니 보기' }); } else window.toast(r.message, 'error');
+      post('C:/Program Files/Git/oneulbanchan-preview/cart/add', { product_id: +buy.elements.product_id.value, qty: +qtyIn.value, option_id: opt ? +opt.value : 0 }).then(function (r) {
+        if (r.ok) { setCartCount(r.count); window.toast(r.message, '', { href: 'C:/Program Files/Git/oneulbanchan-preview/cart', text: '장바구니 보기' }); } else window.toast(r.message, 'error');
       });
     });
     // 하단 구매 바에서 누르면 옵션 선택 칸으로 안내
@@ -207,13 +207,15 @@
       $('[data-sum-total]').textContent = won(r.total);
       var fb = $('[data-freebar]');
       if (fb) fb.innerHTML = r.fee > 0 ? '<b class="num">' + won(+fb.dataset.min - r.amount) + '</b> 더 담으면 배송비가 무료입니다.' : (r.amount > 0 ? '<b>배송비 무료</b>로 받을 수 있습니다.' : '');
+      var gb = $('[data-giftbar]');
+      if (gb) gb.innerHTML = r.amount >= +gb.dataset.min ? '<b>서비스 반찬</b> ' + gb.dataset.text + '를 함께 보내 드려요.' : '<b class="num">' + won(+gb.dataset.min - r.amount) + '</b> 더 담으면 ' + gb.dataset.text + '를 함께 보내 드려요.';
       $('[data-checkout]').classList.toggle('is-disabled', r.amount <= 0);
       if (!$$('[data-line]', cart).length) location.reload();
     };
     cart.addEventListener('change', function (e) {
       var q = e.target.closest('[data-cart-qty]'); if (!q) return;
       var line = e.target.closest('[data-line]');
-      post('/oneulbanchan-preview/cart/update', { cart_id: +line.dataset.line, qty: +e.target.value || 1 }).then(function (r) {
+      post('C:/Program Files/Git/oneulbanchan-preview/cart/update', { cart_id: +line.dataset.line, qty: +e.target.value || 1 }).then(function (r) {
         if (!r.ok) return window.toast(r.message, 'error');
         e.target.value = r.qty; $('[data-line-amt]', line).textContent = won(+line.dataset.price * r.qty); sums(r);
       });
@@ -221,7 +223,7 @@
     cart.addEventListener('click', function (e) {
       var b = e.target.closest('[data-cart-del]'); if (!b) return;
       var line = b.closest('[data-line]');
-      post('/oneulbanchan-preview/cart/remove', { cart_id: [+line.dataset.line] }).then(function (r) { if (r.ok) { line.remove(); sums(r); } });
+      post('C:/Program Files/Git/oneulbanchan-preview/cart/remove', { cart_id: [+line.dataset.line] }).then(function (r) { if (r.ok) { line.remove(); sums(r); } });
     });
   }
 
@@ -229,14 +231,42 @@
   var order = $('#orderForm');
   if (order) {
     var coupon = $('[data-coupon]', order);
+    var cpList = $('[data-coupons]', order);
+    var cpSum = function () {
+      if (cpList) return Math.min(+order.dataset.amount, $$('input:checked', cpList).reduce(function (a, i) { return a + (+i.dataset.discount || 0); }, 0));
+      return coupon && coupon.selectedOptions[0] ? +coupon.selectedOptions[0].dataset.discount : 0;
+    };
+    var ptIn = $('[data-points-in]', order);
+    var ptMax = function (payable) { return Math.max(0, Math.min(+order.dataset.points || 0, payable - (+order.dataset.minPay || 0))); };
     var total = function () {
-      var d = coupon && coupon.selectedOptions[0] ? +coupon.selectedOptions[0].dataset.discount : 0;
-      var t = Math.max(0, +order.dataset.amount + +order.dataset.fee - d);
+      var d = cpSum();
+      var payable = Math.max(0, +order.dataset.amount + +order.dataset.fee - d);
+      var p = 0;
+      if (ptIn) {
+        p = parseInt(ptIn.value.replace(/[^0-9]/g, ''), 10) || 0;
+        var max = ptMax(payable);
+        if (p > max) p = max;
+        if (ptIn.value !== '' && String(p) !== ptIn.value) ptIn.value = p ? String(p) : '';
+      }
+      var t = payable - p;
       $('[data-discount-row]', order).hidden = d <= 0;
       $('[data-discount-sum]', order).textContent = '-' + won(d);
+      var pr = $('[data-points-row]', order);
+      if (pr) { pr.hidden = p <= 0; $('[data-points-sum]', order).textContent = '-' + won(p); }
       $('[data-total]', order).textContent = won(t); $('[data-total-btn]', order).textContent = won(t);
     };
     if (coupon) coupon.addEventListener('change', total);
+    if (cpList) cpList.addEventListener('change', total);
+    if (ptIn) {
+      ptIn.addEventListener('input', total);
+      var all = $('[data-points-all]', order);
+      if (all) all.addEventListener('click', function () {
+        var d = cpSum();
+        var m = ptMax(Math.max(0, +order.dataset.amount + +order.dataset.fee - d));
+        ptIn.value = m ? String(m) : ''; total();
+        if (!m) window.toast('결제 금액이 적어 적립금을 쓸 수 없습니다.', 'error');
+      });
+    }
     total();
     var bankOnly = $('[data-bank-only]', order);
     $$('[data-pay]', order).forEach(function (r) {
