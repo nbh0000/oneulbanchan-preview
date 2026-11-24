@@ -21,8 +21,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 <style>@font-face{font-family:'Pretendard Variable';font-weight:45 920;font-style:normal;font-display:swap;src:url('/oneulbanchan-preview/assets/fonts/pretendard.woff2') format('woff2-variations')}@font-face{font-family:'MaruBuri';font-weight:700;font-style:normal;font-display:swap;src:url('/oneulbanchan-preview/assets/fonts/maruburi-bold.woff2') format('woff2')}</style>
-<link rel="stylesheet" href="/oneulbanchan-preview/assets/css/shop.css?v=57097a8a">
-<link rel="stylesheet" href="/oneulbanchan-preview/assets/css/pages.css?v=6f9f954b">
+<link rel="stylesheet" href="/oneulbanchan-preview/assets/css/shop.css?v=355b7963">
+<link rel="stylesheet" href="/oneulbanchan-preview/assets/css/pages.css?v=355b7963">
 </head>
 <body class="has-tb">
 <a class="skip" href="#main">본문으로 건너뛰기</a>
@@ -73,11 +73,11 @@
       <a href="/oneulbanchan-preview/story">브랜드이야기</a><a href="/oneulbanchan-preview/shop">반찬보기</a><a href="/oneulbanchan-preview/subscribe" class="new">정기배송</a><a href="/oneulbanchan-preview/c/week">일주일반찬</a><a href="/oneulbanchan-preview/c/set">한상세트</a><a href="/oneulbanchan-preview/c/namulbap">나물밥식단</a><a href="/oneulbanchan-preview/reviews">솔직한리뷰</a>    </nav>
     <div class="tools">
       <div class="auth">
-        <a href="/oneulbanchan-preview/login">로그인</a><a href="/oneulbanchan-preview/register">회원가입</a>        <a href="/oneulbanchan-preview/help">고객센터</a>
+        <a href="/oneulbanchan-preview/login">로그인</a><a class="join" href="/oneulbanchan-preview/register">회원가입<span class="join__tip">신규가입 시 1만원 할인쿠폰</span></a>        <a href="/oneulbanchan-preview/help">고객센터</a>
       </div>
       <button class="ibtn" type="button" aria-label="검색" aria-expanded="false" aria-controls="sbar" data-search-toggle><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
       <a class="ibtn user-btn" href="/oneulbanchan-preview/login" aria-label="로그인"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></a>
-      <a class="ibtn cartn" href="/oneulbanchan-preview/cart" aria-label="장바구니"><svg class="icon" aria-hidden="true"><use href="#i-cart"/></svg><em data-cart-count data-n="0">0</em></a>
+      <a class="join-m" href="/oneulbanchan-preview/register">신규가입 시 1만원 할인쿠폰</a>      <a class="ibtn cartn" href="/oneulbanchan-preview/cart" aria-label="장바구니"><svg class="icon" aria-hidden="true"><use href="#i-cart"/></svg><em data-cart-count data-n="0">0</em></a>
       <button class="ibtn menu-btn" type="button" aria-label="전체 메뉴" aria-expanded="false" aria-controls="drawer" data-drawer-open><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
     </div>
   </div>
@@ -135,7 +135,7 @@
 <div class="container container--narrow page">
   <header class="ph-head"><nav class="crumb" aria-label="현재 위치"><a href="/oneulbanchan-preview/">홈</a><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg><a href="/oneulbanchan-preview/help">고객센터</a></nav><h1>문의 답변 확인</h1><p>문의할 때 적은 이름과 휴대폰 번호를 입력해 주세요.</p></header>
   <form class="form box" method="post" action="/oneulbanchan-preview/contact/check">
-    <input type="hidden" name="_csrf" value="5aa9cb1cde0598f333e600f5e76c4df5">    <div class="form-row">
+    <input type="hidden" name="_csrf" value="c55a1a6604b40de7e9c743be0c0f1f1e">    <div class="form-row">
       <div class="field"><label for="f_name">이름<span class="req" aria-hidden="true">*</span></label><input class="input" type="text" value="" id="f_name" name="name" required autocomplete="name"></div>      <div class="field"><label for="f_phone">휴대폰 번호<span class="req" aria-hidden="true">*</span></label><input class="input" type="tel" value="" id="f_phone" name="phone" required autocomplete="tel" inputmode="tel"></div>    </div>
     <button class="btn btn-primary">확인하기</button>
   </form>
@@ -171,7 +171,7 @@
   <a href="/oneulbanchan-preview/cart"><svg class="icon" aria-hidden="true"><use href="#i-cart"/></svg>장바구니<em data-cart-count data-n="0">0</em></a>
 </nav>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
-<script>window.__flash=[];window.__csrf="5aa9cb1cde0598f333e600f5e76c4df5";</script>
+<script>window.__flash=[];window.__csrf="c55a1a6604b40de7e9c743be0c0f1f1e";</script>
 <script src="/oneulbanchan-preview/assets/js/shop.js?v=2132e845" defer></script>
 </body>
 </html>

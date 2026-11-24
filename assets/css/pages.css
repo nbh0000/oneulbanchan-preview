@@ -467,12 +467,6 @@
 .story-video__frame{position:relative;aspect-ratio:16/9;border-radius:var(--r-xl);overflow:hidden;background:#1d1712;box-shadow:var(--sh-md)}
 .story-video__frame iframe,.story-video__frame video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
 
-/* 메인: 가입 쿠폰 띠 */
-.wb{display:grid;gap:clamp(1.25rem,1rem + 2vw,2.5rem);align-items:center}
-.wb__tx p{margin-top:10px;color:var(--brown-700)}
-.wb__cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:20px}
-.wb .pack .coupon{background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
-@media (min-width:1024px){.wb{grid-template-columns:minmax(0,.75fr) minmax(0,1.7fr)}.wb .pack{grid-template-columns:repeat(3,minmax(0,1fr))}.wb .pack .coupon{padding:20px}}
 
 /* 메인: 체크리스트 + 딱 3가지 */
 .why{display:grid;gap:clamp(1.5rem,1rem + 3vw,3.5rem);align-items:start}
@@ -488,3 +482,12 @@
 .pd__wel>span{flex:1}
 @media (hover:hover) and (pointer:fine){.pd__wel:hover{box-shadow:inset 0 0 0 1px var(--terra-600)}}
 .pd__wel:active{transform:scale(.99)}
+/* 상단 회원가입 쿠폰 말풍선 */
+.hd .auth .join{position:relative}
+.join__tip{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:var(--terra-600);color:#fff;font-size:.75rem;font-weight:700;line-height:1;padding:7px 10px;border-radius:8px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 10px rgba(120,50,20,.18);animation:joinTip 2.4s ease-in-out infinite}
+.join__tip::before{content:"";position:absolute;bottom:100%;left:50%;margin-left:-5px;border:5px solid transparent;border-bottom-color:var(--terra-600)}
+@keyframes joinTip{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,3px)}}
+.join-m{display:none}
+@media (max-width:1023px){.join-m{display:inline-flex;align-items:center;order:-1;margin-right:6px;background:var(--terra-600);color:#fff;font-size:.6875rem;font-weight:700;line-height:1.2;padding:6px 9px;border-radius:8px;text-decoration:none;white-space:nowrap;touch-action:manipulation}.join-m:active{transform:scale(.97)}}
+@media (max-width:359px){.join-m{display:none}}
+@media (prefers-reduced-motion:reduce){.join__tip{animation:none}}
