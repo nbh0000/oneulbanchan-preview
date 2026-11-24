@@ -466,3 +466,25 @@
 .story-video__head p{margin-top:8px;color:var(--brown-700)}
 .story-video__frame{position:relative;aspect-ratio:16/9;border-radius:var(--r-xl);overflow:hidden;background:#1d1712;box-shadow:var(--sh-md)}
 .story-video__frame iframe,.story-video__frame video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+
+/* 메인: 가입 쿠폰 띠 */
+.wb{display:grid;gap:clamp(1.25rem,1rem + 2vw,2.5rem);align-items:center}
+.wb__tx p{margin-top:10px;color:var(--brown-700)}
+.wb__cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:20px}
+.wb .pack .coupon{background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+@media (min-width:1024px){.wb{grid-template-columns:minmax(0,.75fr) minmax(0,1.7fr)}.wb .pack{grid-template-columns:repeat(3,minmax(0,1fr))}.wb .pack .coupon{padding:20px}}
+
+/* 메인: 체크리스트 + 딱 3가지 */
+.why{display:grid;gap:clamp(1.5rem,1rem + 3vw,3.5rem);align-items:start}
+.why__check .checklist{margin-left:0}
+.why__ans{margin-top:clamp(1.25rem,1rem + 1.5vw,2rem)}
+.why__three{background:var(--green-900) url(/oneulbanchan-preview/assets/img/bg/linen.webp) center/cover;background-blend-mode:multiply;color:#fff;border-radius:var(--r-xl);padding:clamp(1.5rem,1rem + 2.5vw,3rem)}
+.why__three .t-h2{color:#fff}
+.why__three .btn{margin-top:clamp(1rem,.8rem + 1vw,1.5rem)}
+@media (min-width:1024px){.why{grid-template-columns:1fr 1fr}}
+
+/* 상세: 가입 쿠폰 안내 */
+.pd__wel{margin:0 0 16px;color:var(--brown-900);text-decoration:none}
+.pd__wel>span{flex:1}
+@media (hover:hover) and (pointer:fine){.pd__wel:hover{box-shadow:inset 0 0 0 1px var(--terra-600)}}
+.pd__wel:active{transform:scale(.99)}
