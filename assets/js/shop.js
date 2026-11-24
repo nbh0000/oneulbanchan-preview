@@ -34,7 +34,7 @@
   /* ---------- 사진이 깨지면 빈 접시 그림으로 ---------- */
   document.addEventListener('error', function (e) {
     var img = e.target;
-    if (img.tagName === 'IMG' && !img.dataset.fallback) { img.dataset.fallback = '1'; img.src = 'C:/Program Files/Git/oneulbanchan-preview/assets/img/empty-dish.svg'; }
+    if (img.tagName === 'IMG' && !img.dataset.fallback) { img.dataset.fallback = '1'; img.src = '/oneulbanchan-preview/assets/img/empty-dish.svg'; }
   }, true);
 
   /* ---------- 서랍 메뉴 ---------- */
@@ -122,9 +122,9 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-add]'); if (!b) return;
     e.preventDefault(); b.classList.add('is-busy');
-    post('C:/Program Files/Git/oneulbanchan-preview/cart/add', { product_id: +b.dataset.add, qty: 1 }).then(function (r) {
+    post('/oneulbanchan-preview/cart/add', { product_id: +b.dataset.add, qty: 1 }).then(function (r) {
       b.classList.remove('is-busy');
-      if (r.ok) { setCartCount(r.count); window.toast(r.message, '', { href: 'C:/Program Files/Git/oneulbanchan-preview/cart', text: '장바구니 보기' }); }
+      if (r.ok) { setCartCount(r.count); window.toast(r.message, '', { href: '/oneulbanchan-preview/cart', text: '장바구니 보기' }); }
       else if (r.needOption && r.url) location.href = r.url;
       else window.toast(r.message, 'error');
     });
@@ -154,8 +154,8 @@
       var b = e.target.closest('[data-cart-submit]'); if (!b) return;
       e.preventDefault();
       if (!buy.reportValidity()) { if (opt && !opt.value) opt.scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
-      post('C:/Program Files/Git/oneulbanchan-preview/cart/add', { product_id: +buy.elements.product_id.value, qty: +qtyIn.value, option_id: opt ? +opt.value : 0 }).then(function (r) {
-        if (r.ok) { setCartCount(r.count); window.toast(r.message, '', { href: 'C:/Program Files/Git/oneulbanchan-preview/cart', text: '장바구니 보기' }); } else window.toast(r.message, 'error');
+      post('/oneulbanchan-preview/cart/add', { product_id: +buy.elements.product_id.value, qty: +qtyIn.value, option_id: opt ? +opt.value : 0 }).then(function (r) {
+        if (r.ok) { setCartCount(r.count); window.toast(r.message, '', { href: '/oneulbanchan-preview/cart', text: '장바구니 보기' }); } else window.toast(r.message, 'error');
       });
     });
     // 하단 구매 바에서 누르면 옵션 선택 칸으로 안내
@@ -215,7 +215,7 @@
     cart.addEventListener('change', function (e) {
       var q = e.target.closest('[data-cart-qty]'); if (!q) return;
       var line = e.target.closest('[data-line]');
-      post('C:/Program Files/Git/oneulbanchan-preview/cart/update', { cart_id: +line.dataset.line, qty: +e.target.value || 1 }).then(function (r) {
+      post('/oneulbanchan-preview/cart/update', { cart_id: +line.dataset.line, qty: +e.target.value || 1 }).then(function (r) {
         if (!r.ok) return window.toast(r.message, 'error');
         e.target.value = r.qty; $('[data-line-amt]', line).textContent = won(+line.dataset.price * r.qty); sums(r);
       });
@@ -223,7 +223,7 @@
     cart.addEventListener('click', function (e) {
       var b = e.target.closest('[data-cart-del]'); if (!b) return;
       var line = b.closest('[data-line]');
-      post('C:/Program Files/Git/oneulbanchan-preview/cart/remove', { cart_id: [+line.dataset.line] }).then(function (r) { if (r.ok) { line.remove(); sums(r); } });
+      post('/oneulbanchan-preview/cart/remove', { cart_id: [+line.dataset.line] }).then(function (r) { if (r.ok) { line.remove(); sums(r); } });
     });
   }
 
