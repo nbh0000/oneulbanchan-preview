@@ -373,15 +373,19 @@
 .err-page .code{font-family:var(--font-hand);font-size:clamp(3rem,2.4rem + 3vw,5rem);color:var(--terra-600);line-height:1}
 
 /* 신규 회원 혜택: 체크리스트 */
-.checklist{display:grid;gap:10px;margin:clamp(1.25rem,1rem + 1.5vw,2rem) auto 0;max-width:640px}
-.checklist label{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r-md);background:#fff;box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;font-size:clamp(1rem,.95rem + .3vw,1.125rem);font-weight:600;color:var(--brown-900);transition:background-color .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.checklist{position:relative;display:grid;margin:clamp(1.25rem,1rem + 1.5vw,2rem) auto 0;max-width:640px;background:var(--rice-100) url(/oneulbanchan-preview/assets/img/bg/paper.webp) center/cover;border-radius:6px;padding:clamp(1.5rem,1.2rem + 1vw,2rem) clamp(1.25rem,1rem + 1.2vw,2rem) clamp(.5rem,.4rem + .5vw,.875rem);box-shadow:0 1px 0 var(--line),0 18px 40px -24px rgba(91,64,48,.35)}
+.checklist::before{content:"";position:absolute;top:-11px;left:clamp(1.5rem,8%,3rem);width:84px;height:24px;transform:rotate(-3deg);background:rgba(228,128,56,.34)}
+.checklist li+li label{border-top:1px dashed #D9CCB4}
+.checklist label{display:flex;align-items:center;gap:14px;padding:clamp(.85rem,.7rem + .5vw,1.1rem) 2px;cursor:pointer;font-size:clamp(1rem,.95rem + .3vw,1.125rem);font-weight:600;color:var(--brown-900);transition:color .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .checklist input{position:absolute;opacity:0;width:1px;height:1px}
-.checklist .box{flex:none;width:26px;height:26px;border-radius:7px;box-shadow:inset 0 0 0 2px var(--line);display:flex;align-items:center;justify-content:center;color:transparent;transition:background-color .2s,color .2s,box-shadow .2s}
-.checklist .box .icon{width:16px;height:16px}
-.checklist input:checked+.box{background:var(--green-700);box-shadow:none;color:#fff}
-.checklist label:has(input:checked){background:var(--green-100);box-shadow:inset 0 0 0 1px var(--green-700)}
+.checklist .box{flex:none;width:24px;height:24px;padding:0;border-radius:6px;background:#fff;box-shadow:inset 0 0 0 1.5px #C9B89C;display:flex;align-items:center;justify-content:center;color:transparent;transition:background-color .2s,color .2s,box-shadow .2s,transform .2s cubic-bezier(.2,.9,.3,1.4)}
+.checklist .box .icon{width:15px;height:15px;stroke-width:3}
+.checklist input:checked+.box{background:var(--green-700);box-shadow:none;color:#fff;transform:rotate(-6deg)}
+.checklist label:has(input:checked){color:var(--green-700)}
 .checklist input:focus-visible+.box{outline:2px solid var(--green-700);outline-offset:2px}
-.checklist label:active{transform:scale(.99)}
+.checklist label:active .box{transform:scale(.9)}
+@media (hover:hover) and (pointer:fine){.checklist label:hover .box{box-shadow:inset 0 0 0 1.5px var(--green-700)}}
+@media (prefers-reduced-motion:reduce){.checklist .box{transition:none}}
 .checklist__ans{margin-top:clamp(1.75rem,1.25rem + 2vw,2.75rem)}
 
 /* 판매 TOP3 */
@@ -410,9 +414,9 @@
 
 /* 딱 3가지 */
 .three{display:grid;gap:0;margin-top:clamp(1.25rem,1rem + 1.5vw,2.25rem)}
-.three li{display:grid;grid-template-columns:clamp(56px,8vw,96px) 1fr;gap:clamp(12px,2vw,28px);align-items:baseline;padding:clamp(1rem,.8rem + 1vw,1.75rem) 0;border-top:1px solid rgba(255,255,255,.18)}
-.three .n{font-family:var(--font-hand);font-size:clamp(3rem,2.4rem + 3vw,5rem);line-height:.9;color:var(--gold)}
-.three h3{font-size:clamp(1.25rem,1.05rem + .9vw,1.75rem);font-weight:800;letter-spacing:-.02em;color:#fff}
+.three li{display:grid;grid-template-columns:clamp(36px,3.2vw,48px) 1fr;gap:clamp(12px,1.4vw,20px);align-items:start;padding:clamp(1rem,.8rem + 1vw,1.75rem) 0;border-top:1px solid rgba(255,255,255,.18)}
+.three .n{font-family:var(--font-hand);font-size:clamp(2.5rem,2.1rem + 1.6vw,3.5rem);line-height:.8;color:var(--gold);text-align:center}
+.three h3{line-height:1.35;font-size:clamp(1.1875rem,1.05rem + .6vw,1.5rem);font-weight:800;letter-spacing:-.02em;color:#fff}
 .three p{margin-top:6px;color:#C9D6C4}
 
 /* 세트 안내 */
@@ -469,13 +473,16 @@
 
 
 /* 메인: 체크리스트 + 딱 3가지 */
-.why{display:grid;gap:clamp(1.5rem,1rem + 3vw,3.5rem);align-items:start}
-.why__check .checklist{margin-left:0}
-.why__ans{margin-top:clamp(1.25rem,1rem + 1.5vw,2rem)}
-.why__three{background:var(--green-900) url(/oneulbanchan-preview/assets/img/bg/linen.webp) center/cover;background-blend-mode:multiply;color:#fff;border-radius:var(--r-xl);padding:clamp(1.5rem,1rem + 2.5vw,3rem)}
+.why{display:grid;gap:clamp(2rem,1rem + 3vw,4rem);align-items:stretch}
+.why__check{display:flex;flex-direction:column}
+.why__check .checklist{margin-inline:0;max-width:none;align-self:stretch}
+.why__ans{margin-top:clamp(1.5rem,1rem + 1.5vw,2.25rem);font-family:var(--font-hand);font-weight:400;font-size:clamp(1.75rem,1.4rem + 1.4vw,2.5rem);line-height:1.25;color:var(--brown-700);transition:color .3s}
+.why__check:has(input:checked) .why__ans{color:var(--terra-600)}
+.why__three{display:flex;flex-direction:column;background:var(--green-900) url(/oneulbanchan-preview/assets/img/bg/linen.webp) center/cover;background-blend-mode:multiply;color:#fff;border-radius:var(--r-xl);padding:clamp(1.5rem,1rem + 2.5vw,3rem)}
 .why__three .t-h2{color:#fff}
-.why__three .btn{margin-top:clamp(1rem,.8rem + 1vw,1.5rem)}
-@media (min-width:1024px){.why{grid-template-columns:1fr 1fr}}
+.why__three .three{flex:1}
+.why__three .btn{align-self:flex-start;margin-top:clamp(1rem,.8rem + 1vw,1.5rem)}
+@media (min-width:1024px){.why{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}}
 
 /* 상세: 가입 쿠폰 안내 */
 .pd__wel{margin:0 0 16px;color:var(--brown-900);text-decoration:none}
