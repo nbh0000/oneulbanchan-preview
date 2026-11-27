@@ -205,6 +205,8 @@
       $('[data-sum-amount]').textContent = won(r.amount);
       $('[data-sum-fee]').textContent = r.fee ? '+' + won(r.fee) : '무료';
       $('[data-sum-total]').textContent = won(r.total);
+      var hr = $('[data-sum-happy-row]');
+      if (hr) { hr.hidden = !(r.happy > 0); $('[data-sum-happy]').textContent = '-' + won(r.happy || 0); }
       var fb = $('[data-freebar]');
       if (fb) fb.innerHTML = r.fee > 0 ? '<b class="num">' + won(+fb.dataset.min - r.amount) + '</b> 더 담으면 배송비가 무료입니다.' : (r.amount > 0 ? '<b>배송비 무료</b>로 받을 수 있습니다.' : '');
       var gb = $('[data-giftbar]');
