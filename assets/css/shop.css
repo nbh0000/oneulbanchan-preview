@@ -242,6 +242,10 @@ input,select,textarea{font:inherit;color:inherit}
 .sh{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s6);margin-bottom:clamp(1.5rem,1rem + 2vw,2.5rem)}
 .sh .eyebrow{display:block;margin-bottom:2px}
 .sh h2{font-size:var(--fs-h2);font-family:var(--font-head);font-weight:700;letter-spacing:-.035em;line-height:1.35;text-wrap:balance}
+/* 구역 제목 앞 주황 선: 첫 화면 꼬리표("—— 반찬고민해결사 정래윤")와 같은 선을 제목 크기에 맞춰 */
+.sh h2,.why h2{display:flex;align-items:flex-start;gap:clamp(12px,.8vw + 8px,20px)}
+.sh h2::before,.why h2::before{content:"";flex:none;width:clamp(28px,1.6vw + 18px,44px);height:2px;margin-top:calc(.5lh - 1px);border-radius:2px;background:var(--terra-600)}
+.sec-dark .sh h2::before,.why__three h2::before{background:#E48038}
 .sh p{margin-top:10px;color:var(--brown-700)}
 .sec-dark .sh p,.sec-dark .link{color:#C9D6C4}
 .sh .link{flex:none}
@@ -337,7 +341,7 @@ input,select,textarea{font:inherit;color:inherit}
 @media (prefers-reduced-motion:reduce){[data-bn] > .hero__track{transition:none}}
 .hero .eyebrow{display:flex;align-items:center;gap:10px;font-size:.9375rem;font-weight:700;letter-spacing:-.01em;color:var(--terra-600)}
 .hero .eyebrow::before{content:"";width:28px;height:2px;background:currentColor;border-radius:2px}
-.hero h1{margin:14px 0 18px;font-family:var(--font-display);font-weight:400;font-size:clamp(3rem,1rem + 4.4vw,5.25rem);line-height:1.05;letter-spacing:0}
+.hero h1{margin:14px 0 18px;font-family:var(--font-head);font-weight:700;font-size:clamp(2.25rem,.9rem + 3.4vw,4.25rem);line-height:1.2;letter-spacing:-.04em}
 .hero h1 .l2{color:var(--green-700);display:block}
 .hero .lead{font-size:clamp(1rem,.93rem + .35vw,1.1875rem);line-height:1.75;color:var(--brown-700);max-width:25em}
 .hero .ctas{display:flex;gap:10px;margin-top:clamp(1.5rem,1.2rem + 1.2vw,2.25rem);flex-wrap:wrap}
@@ -390,7 +394,7 @@ input,select,textarea{font:inherit;color:inherit}
 @media (max-height:480px) and (orientation:landscape){.hero__in{grid-template-columns:1fr 1fr}.hero{padding-top:16px}}
 /* 글자 슬라이드 (배너에 제목을 적은 경우) */
 .hero__slide--cap{display:block;color:inherit;text-decoration:none}
-.hero__slide--cap .cap-t{margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(2.25rem,.9rem + 3.4vw,4.25rem);line-height:1.15;color:var(--brown-900);text-wrap:balance}
+.hero__slide--cap .cap-t{margin:0;font-family:var(--font-head);font-weight:700;letter-spacing:-.035em;font-size:clamp(2.25rem,.9rem + 3.4vw,4.25rem);line-height:1.15;color:var(--brown-900);text-wrap:balance}
 .hero__slide--cap .cap-more{display:inline-flex;align-items:center;gap:6px;margin-top:clamp(1.25rem,1rem + 1vw,2rem);font-weight:700;color:var(--green-700);border-bottom:1px solid currentColor;padding-bottom:2px}
 .hero__slide--cap .visual .photo img{object-position:50% 50%}
 @media (hover:hover) and (pointer:fine){.hero__slide--cap:hover .cap-more .icon{transform:translateX(3px)}.hero__slide--cap .cap-more .icon{transition:transform .2s}}
@@ -472,6 +476,8 @@ input,select,textarea{font:inherit;color:inherit}
 .how .photos{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;gap:14px;height:clamp(320px,24vw + 220px,560px)}
 .how .photos div{border-radius:var(--r-lg);overflow:hidden;background:var(--rice-200);position:relative;min-height:0}
 .how .photos div:first-child{grid-row:1/3}
+.how .photos.photos--one{display:block;height:auto;min-height:0;align-self:center}
+.how .photos--one div{aspect-ratio:772/343}
 .how .photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* 넓은 화면: 사진 묶음을 오른쪽 노트 카드와 위아래 끝이 맞게 늘인다 */
 @media (min-width:901px){.how .photos{height:auto;min-height:clamp(320px,24vw + 220px,560px)}}

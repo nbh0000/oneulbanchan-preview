@@ -194,6 +194,8 @@
 .done-hero .t-hand-lg{display:block}
 .bankbox{background:var(--memo);border-radius:var(--r-md);padding:18px 20px;display:grid;gap:6px}
 .bankbox b{font-size:1.125rem}
+.autobox{background:var(--memo);border-radius:var(--r-md);padding:18px 20px;display:grid;gap:10px}
+.autobox .note-list{margin:0}
 
 /* ---------- 6. 마이페이지 ---------- */
 .my{display:grid;grid-template-columns:220px minmax(0,1fr);gap:clamp(1.5rem,.5rem + 3vw,3rem);align-items:start}
@@ -478,8 +480,11 @@
 .why__check .checklist{margin-inline:0;max-width:none;align-self:stretch}
 .why__ans{margin-top:clamp(1.5rem,1rem + 1.5vw,2.25rem);font-family:var(--font-hand);font-weight:400;font-size:clamp(1.75rem,1.4rem + 1.4vw,2.5rem);line-height:1.25;color:var(--brown-700);transition:color .3s}
 .why__check:has(input:checked) .why__ans{color:var(--terra-600)}
-.why__three{display:flex;flex-direction:column;background:var(--green-900) url(/oneulbanchan-preview/assets/img/bg/linen.webp) center/cover;background-blend-mode:multiply;color:#fff;border-radius:var(--r-xl);padding:clamp(1.5rem,1rem + 2.5vw,3rem)}
+.why__three{display:flex;flex-direction:column;position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(100deg,rgba(22,46,34,.96) 0%,rgba(22,46,34,.9) 48%,rgba(22,46,34,.62) 100%),linear-gradient(0deg,rgba(22,46,34,.55),rgba(22,46,34,0) 45%),var(--green-900) url(/oneulbanchan-preview/assets/img/bg/haccp-kitchen.webp) 78% 62%/cover no-repeat;color:#fff;border-radius:var(--r-xl);padding:clamp(1.5rem,1rem + 2.5vw,3rem)}
 .why__three .t-h2{color:#fff}
+/* 반찬 만드는 주방 사진을 초록으로 눌러 깔고, 오른쪽 아래로 갈수록 사진이 드러난다. 위쪽에 원목 도마 같은 따뜻한 빛 한 줄 */
+.why__three::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 70% at 100% 100%,rgba(228,128,56,.22),transparent 60%);pointer-events:none}
+.why__three .three li{text-shadow:0 1px 2px rgba(0,0,0,.25)}
 .why__three .three{flex:1}
 .why__three .btn{align-self:flex-start;margin-top:clamp(1rem,.8rem + 1vw,1.5rem)}
 @media (min-width:1024px){.why{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}}

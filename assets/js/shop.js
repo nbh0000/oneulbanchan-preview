@@ -268,12 +268,17 @@
       });
     }
     total();
-    var bankOnly = $('[data-bank-only]', order);
+    var bankOnly = $('[data-bank-only]', order), autoOnly = $('[data-auto-only]', order);
     $$('[data-pay]', order).forEach(function (r) {
       r.addEventListener('change', function () {
-        if (!bankOnly) return;
-        bankOnly.hidden = r.value !== 'BANK';
-        var dep = $('input[name=depositor]', bankOnly); if (dep) dep.required = r.value === 'BANK';
+        if (bankOnly) {
+          bankOnly.hidden = r.value !== 'BANK';
+          var dep = $('input[name=depositor]', bankOnly); if (dep) dep.required = r.value === 'BANK';
+        }
+        if (autoOnly) {
+          autoOnly.hidden = r.value !== 'AUTO';
+          var ag = $('input[name=agree_auto]', autoOnly); if (ag) ag.required = r.value === 'AUTO';
+        }
       });
     });
     order.addEventListener('submit', function () { var b = $('[data-order-btn]', order); if (b) setTimeout(function () { b.disabled = true; }, 0); });
